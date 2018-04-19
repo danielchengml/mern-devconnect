@@ -26,7 +26,7 @@ mongoose
 // Passport Middleware
 app.use(passport.initialize());
 
-// Passport Config
+// Passport Config using a strategy
 require('./config/passport')(passport);
 
 // Use Routes
