@@ -183,6 +183,26 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
         })
 });
 
+// @route   DELETE api/profile/experience/:exp_id
+// @desc    Delete experience from profile
+// @access  Private
+router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const removeIndex = profile.experience
+                .map(item => item.id)
+                .indexOf(req.params.exp_id);
+
+                // Splice out of Array
+                profile.experience.splice(removeIndex, 1);
+
+                // Save
+                profile.save().then(profile => res.json(profile));
+            })
+            .catch(err => res.status(404).json(err));
+});
+
 // @route   POST api/profile/education
 // @desc    Add education to profile
 // @access  Private
@@ -196,7 +216,7 @@ router.post('/education', passport.authenticate('jwt', { session: false }), (req
 
     Profile.findOne({ user: req.user.id })
         .then(profile => {
-            newEdu = {
+            const newEdu = {
                 school: req.body.school,
                 degree: req.body.degree,
                 fieldofstudy: req.body.fieldofstudy,
@@ -211,6 +231,26 @@ router.post('/education', passport.authenticate('jwt', { session: false }), (req
 
             profile.save().then(profile => res.json(profile));
         })
+});
+
+// @route   DELETE api/profile/education/:edu_id
+// @desc    Delete education profile
+// @access  Private
+router.delete('/education/:edu_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const removeIndex = profile.education
+                .map(item => item.id)
+                .indexOf(req.params.edu_id);
+
+                // Splice out of Array
+                profile.education.splice(removeIndex, 1);
+
+                // Save
+                profile.save().then(profile => res.json(profile));
+            })
+            .catch(err => res.status(404).json(err));
 });
 
 module.exports = router;
