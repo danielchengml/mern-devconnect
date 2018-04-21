@@ -22,11 +22,11 @@ class Login extends Component {
       e.preventDefault();
 
       const user = {
-        email: this.state.email,
-        password: this.state.password
-    }
+          email: this.state.email,
+          password: this.state.password
+      }
 
-    console.log(user);
+      console.log(user);
     }
   
     render() {
