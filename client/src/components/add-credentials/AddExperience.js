@@ -75,7 +75,7 @@ class AddExperience extends Component {
               <p className="lead text-center">
                 Add any job or position that you have had in the past or current
               </p>
-              <small className="d-block pd-3">* = required fields</small>
+              <small className="d-block pb-2">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Company"
@@ -126,7 +126,7 @@ class AddExperience extends Component {
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
-                    Current Job
+                    Current
                   </label>
                   <TextAreaFieldGroup
                     placeholder="* Job Description"
@@ -152,12 +152,12 @@ class AddExperience extends Component {
 }
 
 AddExperience.propTypes = {
+  addExperience: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  addExperience: PropTypes.func.isRequired,
   profile: state.profile,
   errors: state.errors
 });
